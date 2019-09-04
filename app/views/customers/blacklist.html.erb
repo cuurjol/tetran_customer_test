@@ -5,9 +5,11 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
-      <%= bootstrap_form_tag(url: add_to_blacklist_customers_path) do |f| %>
-        <%= f.text_field :phone %>
-        <%= f.submit %>
+      <%= bootstrap_form_tag(url: add_to_blacklist_customers_path, layout: :horizontal) do |f| %>
+        <div class="row">
+          <%= f.text_field :phone %>
+          <%= f.submit 'Add customer to blacklist' %>
+        </div>
       <% end %>
     </div>
   </div>
