@@ -7,6 +7,7 @@ class CustomersController < ApplicationController
   end
 
   def blacklist
+    @customer = Customer.new
     @customers = Customer.where(blacklist: true)
   end
 
@@ -21,12 +22,14 @@ class CustomersController < ApplicationController
     @customer.blacklist = false
     @customer.save
 
-    redirect_to(blacklist_customers_path, notice: 'Customer was successfully unbanned.')
+    render(blacklist_customers_path, notice: 'Customer was successfully unbanned.')
   end
 
   def add_to_blacklist
     if @customer.nil?
-      redirect_to(blacklist_customers_path, notice: 'HELLO')
+      @customers = Customer.where(blacklist: true)
+      flash.now[:notice] = "Customer was not found by phone: #{params[:phone]}"
+      render(:blacklist)
     else
       @customer.blacklist = true
       @customer.save

@@ -13,15 +13,15 @@
 ActiveRecord::Schema.define(version: 2019_09_04_091354) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "customers", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
-    t.text "description"
-    t.boolean "blacklist", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'customers', force: :cascade do |t|
+    t.string 'name'
+    t.string 'phone'
+    t.text 'description'
+    t.boolean 'blacklist', default: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
 end
