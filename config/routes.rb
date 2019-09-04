@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   resources :customers, except: :show do
     collection do
       get :blacklist
+      post :add_to_blacklist
     end
 
     member do
-      put :add_to_blacklist
-      put :destroy_from_blacklist
+      put :ban
+      put :unban
     end
   end
 end

@@ -2,6 +2,17 @@
 
 <h1>Blacklist of customers</h1>
 
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <%= bootstrap_form_tag(url: add_to_blacklist_customers_path) do |f| %>
+        <%= f.text_field :phone %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <% if @customers.blank? %>
   <p> Customers not found</p>
 <% else %>

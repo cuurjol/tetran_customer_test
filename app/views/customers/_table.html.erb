@@ -16,13 +16,13 @@
       <td><%= customer.description %></td>
       <td colspan="3">
         <% if action_name == 'blacklist' %>
-          <%= link_to('Destroy from blacklist', destroy_from_blacklist_customer_path(customer), method: :put) %>
+          <%= link_to('Unban', unban_customer_path(customer), method: :put) %>
         <% else %>
           <%= link_to('Edit', edit_customer_path(customer)) %>
           |
           <%= link_to('Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }) %>
           |
-          <%= link_to('Add to Blacklist', add_to_blacklist_customer_path(customer), method: :put) %>
+          <%= link_to('Ban', ban_customer_path(customer), method: :put) %>
         <% end %>
       </td>
     </tr>

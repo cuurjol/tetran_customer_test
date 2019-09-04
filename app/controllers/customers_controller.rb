@@ -1,5 +1,6 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[edit update destroy add_to_blacklist destroy_from_blacklist]
+  before_action :set_customer, only: %i[edit update destroy ban unban]
+  before_action :set_customer_by_phone, only: :add_to_blacklist
 
   def index
     @customers = Customer.where(blacklist: false)
@@ -9,26 +10,36 @@ class CustomersController < ApplicationController
     @customers = Customer.where(blacklist: true)
   end
 
-  def add_to_blacklist
+  def ban
     @customer.blacklist = true
     @customer.save
 
-    redirect_to(root_path, notice: 'Customer was successfully added to blacklist.')
+    redirect_to(root_path, notice: 'Customer was successfully banned.')
   end
 
-  def destroy_from_blacklist
+  def unban
     @customer.blacklist = false
     @customer.save
 
-    redirect_to(blacklist_customers_path, notice: 'Customer was successfully destroyed from blacklist.')
+    redirect_to(blacklist_customers_path, notice: 'Customer was successfully unbanned.')
+  end
+
+  def add_to_blacklist
+    if @customer.nil?
+      redirect_to(blacklist_customers_path, notice: 'HELLO')
+    else
+      @customer.blacklist = true
+      @customer.save
+
+      redirect_to(blacklist_customers_path, notice: 'Customer was successfully added to blacklist.')
+    end
   end
 
   def new
     @customer = Customer.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @customer = Customer.new(customer_params)
@@ -50,7 +61,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-    redirect_to customers_url, notice: 'Customer was successfully destroyed.'
+    redirect_to(customers_url, notice: 'Customer was successfully destroyed.')
   end
 
   private
@@ -59,7 +70,11 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
 
+  def set_customer_by_phone
+    @customer = Customer.find_by_phone(params[:phone])
+  end
+
   def customer_params
-    params.require(:customer).permit(:name, :phone, :description, :description)
+    params.require(:customer).permit(:name, :phone, :description)
   end
 end
