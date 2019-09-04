@@ -4,7 +4,7 @@ class CreateCustomers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :phone
       t.text :description
-      t.boolean :blacklist
+      t.boolean :blacklist, default: false
 
       t.timestamps
     end

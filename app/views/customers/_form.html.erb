@@ -1,0 +1,6 @@
+<%= bootstrap_form_for(@customer) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :phone %>
+  <%= f.text_area :description %>
+  <%= f.submit "Add customer" %>
+<% end %>

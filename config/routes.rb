@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'customers#index'
+
+  resources :customers, except: :show do
+    collection do
+      get :blacklist
+    end
+
+    member do
+      put :add_to_blacklist
+      put :destroy_from_blacklist
+    end
+  end
 end

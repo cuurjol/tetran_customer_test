@@ -1,0 +1,31 @@
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Description</th>
+    <th colspan="3">Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.name %></td>
+      <td><%= customer.phone %></td>
+      <td><%= customer.description %></td>
+      <td colspan="3">
+        <% if action_name == 'blacklist' %>
+          <%= link_to('Destroy from blacklist', destroy_from_blacklist_customer_path(customer), method: :put) %>
+        <% else %>
+          <%= link_to('Edit', edit_customer_path(customer)) %>
+          |
+          <%= link_to('Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }) %>
+          |
+          <%= link_to('Add to Blacklist', add_to_blacklist_customer_path(customer), method: :put) %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

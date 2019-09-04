@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1>List of customers</h1>
+
+<% if @customers.blank? %>
+  <p> Customers not found</p>
+<% else %>
+  <%= render(partial: 'customers/table', locals: { buildings: @customers }) %>
+<% end %>
+
+<%= link_to('New Customer', new_customer_path) %>
+ |
+<%= link_to('Blacklist of customers', blacklist_customers_path) %>
