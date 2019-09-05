@@ -12,4 +12,12 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery
+//= require bootstrap
 //= require_tree .
+
+$(function () {
+  setTimeout(function() {
+    $(".alert").alert('close');
+  }, 3000);
+});

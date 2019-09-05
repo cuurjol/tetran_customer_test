@@ -2,11 +2,7 @@
 
 <h1>List of customers</h1>
 
-<% if @customers.blank? %>
-  <p> Customers not found</p>
-<% else %>
-  <%= render(partial: 'customers/table', locals: { buildings: @customers }) %>
-<% end %>
+<%= customers_list(@customers) %>
 
 <%= link_to('New Customer', new_customer_path) %>
  |

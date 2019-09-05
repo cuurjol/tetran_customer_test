@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-  VALID_PHONE_REGEX = (/\A(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\z/).freeze
+  VALID_PHONE_REGEX = /\A(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\z/.freeze
 
   validates :name, presence: true
   validates :description, presence: true

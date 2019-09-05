@@ -4,29 +4,18 @@
     <th>#</th>
     <th>Name</th>
     <th>Phone</th>
-    <th>Description</th>
-    <th colspan="3">Actions</th>
+    <th class="w-50">Description</th>
+    <th>Actions</th>
   </tr>
   </thead>
-
   <tbody>
-  <% @customers.each_with_index do |customer, index| %>
+  <% customers.each.with_index(1) do |customer, index| %>
     <tr>
-      <td><%= index + 1 %></td>
+      <td><%= index %></td>
       <td><%= customer.name %></td>
       <td><%= customer.phone %></td>
       <td><%= customer.description %></td>
-      <td colspan="3">
-        <% if action_name == 'blacklist' %>
-          <%= link_to('Unban', unban_customer_path(customer), method: :put) %>
-        <% else %>
-          <%= link_to('Edit', edit_customer_path(customer)) %>
-          |
-          <%= link_to('Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' }) %>
-          |
-          <%= link_to('Ban', ban_customer_path(customer), method: :put) %>
-        <% end %>
-      </td>
+      <td><%= customer_actions(customer) %></td>
     </tr>
   <% end %>
   </tbody>

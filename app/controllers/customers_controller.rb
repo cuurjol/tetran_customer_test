@@ -15,26 +15,27 @@ class CustomersController < ApplicationController
     @customer.blacklist = true
     @customer.save
 
-    redirect_to(root_path, notice: 'Customer was successfully banned.')
+    redirect_to(root_path, flash: { success: 'Customer was successfully banned.' })
   end
 
   def unban
     @customer.blacklist = false
     @customer.save
 
-    render(blacklist_customers_path, notice: 'Customer was successfully unbanned.')
+    flash.now[:notice] = 'Customer was successfully unbanned.'
+    render(:blacklist)
   end
 
   def add_to_blacklist
     if @customer.nil?
       @customers = Customer.where(blacklist: true)
-      flash.now[:notice] = "Customer was not found by phone: #{params[:phone]}"
+      flash.now[:error] = "Customer was not found by phone: #{params[:phone]}"
       render(:blacklist)
     else
       @customer.blacklist = true
       @customer.save
 
-      redirect_to(blacklist_customers_path, notice: 'Customer was successfully added to blacklist.')
+      redirect_to(blacklist_customers_path, flash: { success: 'Customer was successfully added to blacklist.' })
     end
   end
 
@@ -48,7 +49,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      redirect_to(root_path, notice: 'Customer was successfully created.')
+      redirect_to(root_path, flash: { success: 'Customer was successfully created.' })
     else
       render(:new)
     end
@@ -56,7 +57,7 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to(root_path, notice: 'Customer was successfully updated.')
+      redirect_to(root_path, flash: { success: 'Customer was successfully updated.' })
     else
       render :edit
     end
@@ -64,7 +65,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-    redirect_to(customers_url, notice: 'Customer was successfully destroyed.')
+    redirect_to(customers_url, flash: { success: 'Customer was successfully destroyed.' })
   end
 
   private

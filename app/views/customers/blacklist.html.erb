@@ -1,24 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Blacklist of customers</h1>
 
-<div class="container">
+<div class="container mb-3">
   <div class="row">
-    <div class="col-lg-6">
-      <%= bootstrap_form_tag(url: add_to_blacklist_customers_path, layout: :horizontal) do |f| %>
-        <div class="row">
-          <%= f.text_field :phone %>
-          <%= f.submit 'Add customer to blacklist' %>
-        </div>
-      <% end %>
-    </div>
+    <%= bootstrap_form_tag(url: add_to_blacklist_customers_path, layout: :inline) do |f| %>
+      <%= f.text_field :phone %>
+      <%= f.submit 'Add customer to blacklist', class: "btn btn-primary ml-3" %>
+    <% end %>
   </div>
 </div>
 
-<% if @customers.blank? %>
-  <p> Customers not found</p>
-<% else %>
-  <%= render(partial: 'customers/table', locals: { buildings: @customers }) %>
-<% end %>
+<%= customers_list(@customers) %>
 
 <%= link_to('List of customers', root_path) %>
