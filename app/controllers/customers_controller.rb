@@ -22,8 +22,7 @@ class CustomersController < ApplicationController
     @customer.blacklist = false
     @customer.save
 
-    flash.now[:notice] = 'Customer was successfully unbanned.'
-    render(:blacklist)
+    redirect_to(blacklist_customers_path, flash: { success: 'Customer was successfully unbanned.' })
   end
 
   def add_to_blacklist
@@ -65,7 +64,7 @@ class CustomersController < ApplicationController
 
   def destroy
     @customer.destroy
-    redirect_to(customers_url, flash: { success: 'Customer was successfully destroyed.' })
+    redirect_to(root_path, flash: { success: 'Customer was successfully destroyed.' })
   end
 
   private

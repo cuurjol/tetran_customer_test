@@ -22,7 +22,7 @@
  
  * Склонируйте репозиторий с GitHub и перейдите в папку приложения:
  ```
- https://github.com/cuurjol/tetran_customer_test.git
+ git clone https://github.com/cuurjol/tetran_customer_test.git
  cd tetran_customer_test
  ```
  
