@@ -7,7 +7,6 @@ class CustomersController < ApplicationController
   end
 
   def blacklist
-    @customer = Customer.new
     @customers = Customer.where(blacklist: true)
   end
 
